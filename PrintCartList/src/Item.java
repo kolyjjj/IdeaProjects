@@ -5,18 +5,32 @@ public class Item
 {
     private String id = new String();
     private double price = 0.0;
-    private double discount = 1.0;
-    private Boolean isHasSecondHalfPricePromotion = false;
-    private int count = 0;
+ //   private double discount = 1.0;
+ //   private Boolean isHasSecondHalfPricePromotion = false;
+ //   private int count = 0;
 //构造函数
     Item(String _id, double _price)
     {
         id = _id;
         price = _price;
 
+
     }
-//方法 返回价格，折扣。设置打折，第二件商品半价，商品数量
     public String getId(){
+        return  id;
+    }
+    public  double getPrice(){
+        return  price;
+    }
+
+    public void setPrice(double _price) {
+        price = _price;
+
+    }
+
+
+//方法 返回价格，折扣。设置打折，第二件商品半价，商品数量
+  /*  public String getId(){
         return  id;
     }
 
@@ -68,6 +82,6 @@ public class Item
     public void printData()
     {
         System.out.println(id+' '+count+' '+price+' '+getPriceWithPromotions());
-    }
+    }*/
 
 }
