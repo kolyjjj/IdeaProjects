@@ -26,7 +26,7 @@ public abstract class Parser<T> {
 
     }
 
-    protected abstract T convert (String line);
+    public abstract T convert (String line);
 
 }
 

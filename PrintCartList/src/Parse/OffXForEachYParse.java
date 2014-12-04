@@ -6,7 +6,7 @@ package Parse;
 public class OffXForEachYParse extends Parser<String> {
 
     @Override
-    protected String convert(String line){
+    public String convert(String line){
         return line;
     }
 }

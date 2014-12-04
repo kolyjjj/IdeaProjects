@@ -19,7 +19,7 @@ public class ParseTxt{
     List<Pair<String,Double>> itemPriceList;
     Map<String,Double> itemPriceMap = new HashMap<String, Double>();
     List<Pair<String,Integer>> cartList;
-    Map<String,Integer> cartMap;
+    Map<String,Integer>  cartMap = new HashMap<String,Integer>() ;
 //
 //   public List<String> parse(String _path) throws IOException {
 //       Path path = Paths.get(_path);
@@ -45,13 +45,18 @@ public class ParseTxt{
 //
 //    }
 
-    public void listToMap(){
-        for (Pair<String,Double> lines:discountPromotionList){
-            discountPromotionMap.put(lines.getKey(),lines.getValue());
-        }
-        for (Pair<String,Double> lines:itemPriceList){
-            itemPriceMap.put(lines.getKey(),lines.getValue());
-        }
+
+    ParseTxt()
+    {
+        discountPromotionList = new LinkedList<Pair<String, Double>>();
+        secondHalfPricePromotionList = new LinkedList<String>();
+        offXForEachYList = new LinkedList<String>();
+        itemPriceList = new LinkedList<Pair<String, Double>>();
+        cartList = new LinkedList<Pair<String, Integer>>();
+        discountPromotionMap = new HashMap<String, Double>();
+        itemPriceMap = new HashMap<String, Double>();
+        cartMap = new HashMap<String,Integer>() ;
+
 
     }
 
@@ -65,20 +70,37 @@ public class ParseTxt{
 
     }
 
+    public void listToMap(){
+        if (discountPromotionList.isEmpty()==false) {
+            for (Pair<String, Double> lines : discountPromotionList) {
+                discountPromotionMap.put(lines.getKey(), lines.getValue());
+            }
+        }
+        if (itemPriceList.isEmpty()==false){
+            for (Pair<String,Double> lines:itemPriceList){
+                 itemPriceMap.put(lines.getKey(),lines.getValue());
+            }
+        }
 
+    }
     public void handleCartList() throws IOException {
 
 
 
       //  List<String> cartList = parse(cartTxtPath);
-       cartMap = new HashMap<String,Integer>() ;
+
         for(Pair<String,Integer> lines:cartList){
 
-            if (lines == null)break;
+            if (lines == null) break;
 
             if (cartMap.containsKey(lines.getKey()) == false)
-                    cartMap.put(lines.getKey(),lines.getValue());
-            else cartMap.put(lines.getKey(),lines.getValue()+ cartMap.get(lines.getKey()));
+                cartMap.put(lines.getKey(),lines.getValue());
+            else
+            {
+                int i = cartMap.get(lines.getKey());
+                cartMap.put(lines.getKey(),lines.getValue()+i);
+            }
+
 
 
         }

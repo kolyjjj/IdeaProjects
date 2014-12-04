@@ -1,17 +1,19 @@
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by arolla on 14-11-21.
  */
 public class PrintList {
-    public static void main(String[] args) throws IOException {
-        //String s =null;// "/home/arolla/IdeaProjects/PrintCartList/";
-        ParseTxt parseTxt = new ParseTxt("discount_promotion","second_half_price_promotion","off_X_for_each_Y","itemPriceList","cart");
+    public  ParseTxt parseTxt = new ParseTxt();
+    public List<Item> itemInfo = new LinkedList<Item>();
+    public List<Double> sumInfo = new LinkedList<Double>();
+
+    PrintList(ParseTxt _parseTxt) throws IOException {
+
+        parseTxt = _parseTxt;
         parseTxt.handleCartList();
         parseTxt.listToMap();
-        //System.out.println(parseTxt.cartMap.size());
 
         Iterator e = parseTxt.cartMap.entrySet().iterator();
         Discount handle_1 = new Discount();
@@ -20,11 +22,14 @@ public class PrintList {
         double totalPriceBefore = 0.0;
         double totalPriceAfter = 0.0;
 
+
         while(e.hasNext())
         {
 
+           // System.out.println(i++);//ceshi
             Map.Entry entry = (Map.Entry) e.next();
-         //   System.out.println(entry.getKey());
+            double info = 0.0;
+        //    System.out.println(entry.getKey());
             Item item = new Item(entry.getKey().toString(), parseTxt.itemPriceMap.get(entry.getKey().toString()));
             System.out.print(item.getId());
             System.out.print(" ");
@@ -32,10 +37,11 @@ public class PrintList {
             System.out.print(" ");
             System.out.print(item.getPrice());
             System.out.print(" ");
+        //    info = info.concat(item.getId()).concat(" ").concat(parseTxt.cartMap.get(entry.getKey().toString()).toString()).concat(" ").concat(Double.toString(item.getPrice())).concat(" ");
 
             totalPriceBefore += item.getPrice()* parseTxt.cartMap.get(entry.getKey().toString());
 
-            if (parseTxt.discountPromotionList.contains(item.getId()))
+            if (parseTxt.discountPromotionMap.containsKey(item.getId()))
                 item = handle_1.discount(item, parseTxt.discountPromotionMap.get(entry.getKey().toString()));
             if (parseTxt.secondHalfPricePromotionList.contains(item.getId()))
                 item = handle_2.secondHalfPrice(item, parseTxt.cartMap.get(entry.getKey().toString()));
@@ -45,7 +51,11 @@ public class PrintList {
 
             double priceTemp = item.getPrice() * parseTxt.cartMap.get(entry.getKey().toString());
             totalPriceAfter += item.getPrice() * parseTxt.cartMap.get(entry.getKey().toString());
+          //  info = info.concat(Double.toString(priceTemp));
             System.out.println(priceTemp);
+            itemInfo.add(item);
+            sumInfo.add(priceTemp);
+
 
 
     }
@@ -57,7 +67,7 @@ public class PrintList {
         System.out.print(" ");
         System.out.print(item.getPrice());
         System.out.print(" ");
-        System.out.print(totalPriceBefore-item.getPrice());
+        System.out.println(totalPriceBefore-item.getPrice());
 
 
 
