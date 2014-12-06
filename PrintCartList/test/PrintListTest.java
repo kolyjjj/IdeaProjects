@@ -14,6 +14,7 @@ public class PrintListTest {
     @Test
     public void should_get_original_sum_when_given_the_item_without_promotions() throws Exception {
         ParseTxt parseTxt = new ParseTxt();
+
         parseTxt.itemPriceList.add( new Pair<String, Double>("ITEM00005",60.0));
         parseTxt.cartList.add(new Pair<String, Integer>("ITEM00005",1));
 
@@ -21,6 +22,7 @@ public class PrintListTest {
       //  parseTxt.handleCartList();//PrintListWillDoIT!
 
         PrintList printList = new PrintList(parseTxt);
+
 
 
         assertThat(printList.itemInfo.get(0).getId(), is("ITEM00005"));
