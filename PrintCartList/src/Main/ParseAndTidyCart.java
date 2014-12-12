@@ -1,11 +1,11 @@
 package Main;
 
 import Parse.CartListParse;
+import Parse.Parser;
 import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +16,12 @@ public class ParseAndTidyCart {
     List<Pair<String,Integer>> cartList;
     Map<String,Integer> cartMap = new HashMap<String,Integer>() ;
 
-    ParseAndTidyCart(){
-        cartList = new LinkedList<Pair<String, Integer>>();
+    ParseAndTidyCart( List<Pair<String,Integer>> _cartList){
+        cartList = _cartList;
     }
     ParseAndTidyCart(String _cartTxtPath) throws IOException {
-        cartList = new CartListParse().parser(_cartTxtPath);
+        Parser cartListParse = new CartListParse(_cartTxtPath);
+        cartList = cartListParse.parser(cartListParse.bufferedReader);
 
     }
     public void tidyCart(){

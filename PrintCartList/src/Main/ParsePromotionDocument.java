@@ -13,6 +13,8 @@ import java.util.Map;
  * Created by arolla on 14-12-11.
  */
 public class ParsePromotionDocument {
+
+
     List<Pair<String,Double>> discountPromotionList;
     Map<String,Double> discountPromotionMap = new HashMap<String, Double>();
     List<String> secondHalfPricePromotionList;
@@ -35,11 +37,35 @@ public class ParsePromotionDocument {
 
     }
 
+    public void setDiscountPromotionMap(Map<String, Double> discountPromotionMap) {
+        this.discountPromotionMap = discountPromotionMap;
+    }
+
+    public void setSecondHalfPricePromotionList(List<String> secondHalfPricePromotionList) {
+        this.secondHalfPricePromotionList = secondHalfPricePromotionList;
+    }
+
+    public void setOffXForEachYList(List offXForEachYList) {
+        this.offXForEachYList = offXForEachYList;
+    }
+
+    public void setItemPriceMap(Map<String, Double> itemPriceMap) {
+        this.itemPriceMap = itemPriceMap;
+    }
+
+
     ParsePromotionDocument(String _discountPromotionPath, String _secondHalfPricePromotionPath, String _offXForEachYPath, String _itemPriceListPath) throws IOException {
-        discountPromotionList = new DiscountParse().parser(_discountPromotionPath);//("discount_promotion", ":");
-        secondHalfPricePromotionList= new SecondHalfPriceParse().parser(_secondHalfPricePromotionPath);//("second_half_price_promotion");
-        offXForEachYList= new OffXForEachYParse().parser(_offXForEachYPath);//("off_X_for_each_Y");
-        itemPriceList = new ItemPriceListParse().parser(_itemPriceListPath);/* ("itemPriceList", ":"); */
+        Parser discountParse = new DiscountParse(_discountPromotionPath);
+        discountPromotionList = discountParse.parser(discountParse.bufferedReader);//("discount_promotion", ":");
+
+        Parser secondHalfPriceParse = new SecondHalfPriceParse(_secondHalfPricePromotionPath);
+        secondHalfPricePromotionList= secondHalfPriceParse.parser(secondHalfPriceParse.bufferedReader);//("second_half_price_promotion");
+
+        Parser offXForEachYParse = new OffXForEachYParse(_offXForEachYPath);
+        offXForEachYList= offXForEachYParse.parser(offXForEachYParse.bufferedReader);//("off_X_for_each_Y");
+
+        Parser itemPriceListParse =  new ItemPriceListParse(_itemPriceListPath);
+        itemPriceList =itemPriceListParse.parser(itemPriceListParse.bufferedReader);/* ("itemPriceList", ":"); */
 
     }
 

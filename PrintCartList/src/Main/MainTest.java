@@ -1,5 +1,7 @@
 package Main;
 
+import MyException.MyException;
+
 import java.io.IOException;
 
 /**
@@ -7,7 +9,7 @@ import java.io.IOException;
  */
 public class MainTest {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, MyException {
         ParsePromotionDocument  parsePromotionDocument = new ParsePromotionDocument("discount_promotion", "second_half_price_promotion", "off_X_for_each_Y","itemPriceList");
         parsePromotionDocument.listToMap();
 

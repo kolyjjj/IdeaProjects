@@ -1,5 +1,6 @@
 package Main;
 
+import MyException.MyException;
 import Promotions.Discount;
 import Promotions.OffXForEachY;
 import Promotions.SecondHalfPrice;
@@ -14,7 +15,7 @@ public class HandleCartWithPromotionStrategies {
     ParsePromotionDocument promotionDocument ;
     Map<String,Integer> cartMap = new HashMap<String,Integer>() ;
     List<Item> itemListBeforeHandling = new LinkedList<Item>();
-    List<Item> itemListAfterHandling= new LinkedList<Item>();
+    List<Item> itemListAfterHandling = new LinkedList<Item>();
 
 
     public void setPromotionDocument(ParsePromotionDocument promotionDocument) {
@@ -25,7 +26,7 @@ public class HandleCartWithPromotionStrategies {
     }
 
 
-    public void handleCart(){
+    public void handleCart() throws MyException {
     Iterator e = cartMap.entrySet().iterator();
     while(e.hasNext()){
 

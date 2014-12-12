@@ -1,5 +1,6 @@
 package Main;
 
+import MyException.MyException;
 import Promotions.OffXForEachY;
 
 import java.util.*;
@@ -27,7 +28,7 @@ public class PrintShoppingList {
         this.itemListAfterHandling = itemListAfterHandling;
     }
 
-    public void print(){
+    public void print() throws MyException {
         System.out.println("购物明细   （数量 单价 小计）");
 
         for (int i = 0; i < cartMap.size(); i++){
