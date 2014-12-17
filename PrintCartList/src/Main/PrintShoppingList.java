@@ -10,13 +10,13 @@ import java.util.*;
  */
 public class PrintShoppingList {
 
-    Map<String,Integer> cartMap = new HashMap<String,Integer>() ;
+    Map<Item,Integer> cartMap = new HashMap<Item,Integer>() ;
     List<Item> itemListBeforeHandling = new LinkedList<Item>();
     List<Item> itemListAfterHandling= new LinkedList<Item>();
     double totalPriceBefore = 0.0;
     double totalPriceAfter =0.0;
 
-    public void setCartMap(Map<String, Integer> cartMap) {
+    public void setCartMap(Map<Item, Integer> cartMap) {
         this.cartMap = cartMap;
     }
 
@@ -30,10 +30,11 @@ public class PrintShoppingList {
 
     public void print() throws MyException {
         System.out.println("购物明细   （数量 单价 小计）");
+        int i = 0;
 
-        for (int i = 0; i < cartMap.size(); i++){
-            String itemName = itemListBeforeHandling.get(i).getId();
-            int itemQuantity = cartMap.get(itemName);
+        for (Item x: cartMap.keySet()){
+            String itemName = x.getId();
+            int itemQuantity = cartMap.get(x);
             double itemPriceBefore = itemListBeforeHandling.get(i).getPrice();
             double itemPriceAfter = itemListAfterHandling.get(i).getPrice();
 
@@ -47,10 +48,15 @@ public class PrintShoppingList {
 
             totalPriceBefore += itemPriceBefore*itemQuantity;
             totalPriceAfter += itemPriceAfter*itemQuantity;
+            i++;
         }
 
         Item abstractTotalItem = new Item("total", totalPriceAfter);
-        abstractTotalItem = new OffXForEachY().offXForEachY(abstractTotalItem,1,3,100);
+        OffXForEachY of = new OffXForEachY();
+        of.setNum(1);
+        of.setX(3);
+        of.setY(100);
+        abstractTotalItem = of.promotion(abstractTotalItem);
 
         System.out.println("总计金额（优惠前 优惠后 优惠差价）");
         System.out.print(abstractTotalItem.getPrice());

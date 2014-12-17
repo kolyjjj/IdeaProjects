@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 public class HandleCartWithPromotionStrategiesTest {
     @Test
     public void should_get_correct_itemListAfterHandling_when_use_method_handleCart() throws Exception {
-        ParsePromotionDocument promotionDocument = new ParsePromotionDocument();
+        PromotionDocument promotionDocument = new PromotionDocument();
         Map<String,Double> discountPromotionMap = new HashMap<String, Double>();
         List<String> secondHalfPricePromotionList = new LinkedList<String>();
         List<String> offXForEachYList = new LinkedList<String>();
@@ -41,4 +41,5 @@ public class HandleCartWithPromotionStrategiesTest {
         assertThat(handleCartWithPromotionStrategies.itemListAfterHandling.get(0).getPrice(),is(26.0));
 
     }
+
 }

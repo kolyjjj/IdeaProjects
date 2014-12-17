@@ -23,26 +23,27 @@ public class SecondHalfPriceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    @Test(expected = MyException.class)
+    @Test
     public void should_throw_MyException_when_item_quantity_is_0() throws Exception {
         Item item = new Item("ITEM000001", 40.0);
         SecondHalfPrice secondHalfPrice = new SecondHalfPrice();
 
-        secondHalfPrice.secondHalfPrice(item, 0);
-
         expectedException.expect(MyException.class);
         expectedException.expectMessage("item quantity should be larger than 0");
+
+        secondHalfPrice.secondHalfPrice(item, 0);
     }
 
-    @Test(expected = MyException.class)
+    @Test
     public void should_throw_MyException_when_item_quantity_is_negative() throws Exception {
         Item item = new Item("ITEM000001",40.0);
         SecondHalfPrice secondHalfPrice = new SecondHalfPrice();
 
-        secondHalfPrice.secondHalfPrice(item,-1);
-
         expectedException.expect(MyException.class);
         expectedException.expectMessage("item quantity should be larger than 0");
+
+        secondHalfPrice.secondHalfPrice(item,-1);
+
 
 
     }

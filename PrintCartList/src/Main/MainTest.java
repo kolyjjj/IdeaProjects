@@ -1,6 +1,10 @@
 package Main;
 
 import MyException.MyException;
+import Parse.CartListParse;
+import Parse.ItemPriceListParse;
+import Parse.Parser;
+import javafx.util.Pair;
 
 import java.io.IOException;
 
@@ -10,22 +14,36 @@ import java.io.IOException;
 public class MainTest {
 
     public static void main(String[] args) throws IOException, MyException {
-        ParsePromotionDocument  parsePromotionDocument = new ParsePromotionDocument("discount_promotion", "second_half_price_promotion", "off_X_for_each_Y","itemPriceList");
-        parsePromotionDocument.listToMap();
+        PromotionDocument promotionDocument = new PromotionDocument();
+        promotionDocument.parsePromotionDocument("discount_promotion", "second_half_price_promotion", "off_X_for_each_Y");
+        promotionDocument.listToMap();
 
-        ParseAndTidyCart parseAndTidyCart = new ParseAndTidyCart("cart");
-        parseAndTidyCart.tidyCart();
 
-        HandleCartWithPromotionStrategies handleCartWithPromotionStrategies = new HandleCartWithPromotionStrategies();
-        handleCartWithPromotionStrategies.setCartMap(parseAndTidyCart.cartMap);
-        handleCartWithPromotionStrategies.setPromotionDocument(parsePromotionDocument);
-        handleCartWithPromotionStrategies.handleCart();
+        Parser<Pair<String,Integer>> cartBeforeTidy = new CartListParse("cart");
+        cartBeforeTidy.parser(cartBeforeTidy.bufferedReader);
 
-        PrintShoppingList printList = new PrintShoppingList();
-        printList.setCartMap(parseAndTidyCart.cartMap);
-        printList.setItemListBeforeHandling(handleCartWithPromotionStrategies.itemListBeforeHandling);
-        printList.setItemListAfterHandling(handleCartWithPromotionStrategies.itemListAfterHandling);
-        printList.print();
+        Parser<Pair<String,Double>> itemPrice = new ItemPriceListParse("itemPriceList");
+        itemPrice.parser(itemPrice.bufferedReader);
+
+
+        Cart cartAfterTidy = new Cart();
+        cartAfterTidy.tidyCart(cartBeforeTidy.list,itemPrice.list);
+
+        PutPromotionStrategiesToItemsOfCart strategy = new PutPromotionStrategiesToItemsOfCart();
+        strategy.handleCartWithPromotions(cartAfterTidy,promotionDocument);
+
+        Calculate cal = new Calculate();
+        cal.calculate(strategy.getItemsWithPromotions());
+
+        PrintShoppingList pr = new PrintShoppingList();
+        pr.setCartMap(cartAfterTidy.cartMap);
+        pr.setItemListBeforeHandling(cal.itemListBeforeHandling);
+        pr.setItemListAfterHandling(cal.itemListAfterHandling);
+        pr.print();
+
+
+
+
 
     }
 }

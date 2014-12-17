@@ -5,7 +5,7 @@ import javafx.util.Pair;
 import java.io.FileNotFoundException;
 
 /**
- * Created by arolla on 14-12-1.
+ * Created by.
  */
 public class ItemPriceListParse extends Parser<Pair<String,Double>>{
 
@@ -21,7 +21,7 @@ public class ItemPriceListParse extends Parser<Pair<String,Double>>{
     @Override
     public Pair<String,Double> convert(String line){
         String tokens[] = line.split(":");
-        return new Pair<String, Double>(tokens[0],Double.parseDouble(tokens[1]));
+        return new Pair<String,Double>(tokens[0],Double.parseDouble(tokens[1]));
 
     }
 }

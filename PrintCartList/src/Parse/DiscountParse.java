@@ -1,5 +1,6 @@
 package Parse;
 
+import Promotions.Discount;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
@@ -7,7 +8,7 @@ import java.io.FileNotFoundException;
 /**
  * Created by arolla on 14-12-1.
  */
-public class DiscountParse extends Parser<Pair<String,Double>> {
+public class DiscountParse extends Parser<Pair<String,Discount>> {
 
     public DiscountParse(String _path) throws FileNotFoundException {
         super(_path);
@@ -18,9 +19,12 @@ public class DiscountParse extends Parser<Pair<String,Double>> {
     }
 
     @Override
-    public Pair<String,Double> convert (String line){
+    public Pair<String, Discount> convert(String line){
         String[] tokens = line.split(":");
-        return new Pair<String, Double>(tokens[0],Double.parseDouble(tokens[1]));
+        String itemId = tokens[0];
+        Discount promotion = new Discount();
+        promotion.setDiscount(Double.parseDouble(tokens[1]));
+        return new Pair<String, Discount>(itemId,promotion);
     }
 
 

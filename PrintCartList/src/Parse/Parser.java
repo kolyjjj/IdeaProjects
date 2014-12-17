@@ -20,7 +20,7 @@ public abstract class Parser<T> {
 
     public List<T> parser(BufferedReader bufferedReader) throws IOException{
 
-        String line = null;
+        String line ;
         while((line=bufferedReader.readLine()) != null&& !line.isEmpty()){
             list.add(convert(line) );
         }
@@ -28,9 +28,7 @@ public abstract class Parser<T> {
      }
 
 
-
-
-     public abstract T convert (String line);
+     public abstract T convert(String line);
 
 }
 
