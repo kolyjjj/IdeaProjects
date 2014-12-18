@@ -1,5 +1,7 @@
 package Parse;
 
+import Promotions.OffXForEachY;
+import javafx.util.Pair;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -17,9 +19,10 @@ public class OffXForEachYParseTest {
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
 
-        List<String> list = offXForEachY.parser(reader);
+        List<Pair<String, OffXForEachY>> list = offXForEachY.parser(reader);
 
-        assertThat(list.get(0),is("ITEM000001"));
+        assertThat(list.get(0).getKey(),is("ITEM000001"));
+        assertThat(list.get(0).getValue(),is(OffXForEachY.class));
 
     }
 }

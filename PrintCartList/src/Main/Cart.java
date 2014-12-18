@@ -11,7 +11,12 @@ import java.util.Map;
  */
 public class Cart {
 
+
+
     Map<Item, Integer> cartMap = new HashMap<Item, Integer>();
+    public void setCartMap(Map<Item, Integer> cartMap) {
+        this.cartMap = cartMap;
+    }
 
     public void tidyCart(List<Pair<String, Integer>> cartList, List<Pair<String, Double>> priceList) {
 
@@ -22,7 +27,6 @@ public class Cart {
             int itemNum = 0;
 
             for (Pair<String, Integer> lines : cartList) {
-                //if (lines.getKey() == null) break;
                 if (lines.getKey().equals(pair.getKey())) {
                     itemNum += lines.getValue();
                 }

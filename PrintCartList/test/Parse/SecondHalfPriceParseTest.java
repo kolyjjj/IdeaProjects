@@ -1,5 +1,7 @@
 package Parse;
 
+import Promotions.SecondHalfPrice;
+import javafx.util.Pair;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -17,9 +19,10 @@ public class SecondHalfPriceParseTest {
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
 
-        List<String> list = secondHalfPriceParse.parser(reader);
+        List<Pair<String, SecondHalfPrice>> list = secondHalfPriceParse.parser(reader);
 
-        assertThat(list.get(0),is("ITEM000001"));
+        assertThat(list.get(0).getKey(),is("ITEM000001"));
+        assertThat(list.get(0).getValue(),is(SecondHalfPrice.class));
 
 
     }

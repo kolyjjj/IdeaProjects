@@ -8,9 +8,14 @@ import MyException.MyException;
  */
  public class Discount implements Promotion{
 
+
+
     double discount;
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+    public double getDiscount() {
+        return discount;
     }
 
 //    public Item discount(Item item, double discount) throws MyException{

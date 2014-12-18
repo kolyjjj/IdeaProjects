@@ -1,5 +1,6 @@
 package Parse;
 
+import Promotions.Discount;
 import javafx.util.Pair;
 import org.junit.Test;
 
@@ -19,10 +20,10 @@ public class DiscountParseTest {
         BufferedReader reader = mock(BufferedReader.class);
          when(reader.readLine()).thenReturn("ITEM00001:0.75").thenReturn(null);
 
-        List<Pair<String,Double>> list = discountParse.parser(reader);
+        List<Pair<String, Discount>> list = discountParse.parser(reader);
 
         assertThat(list.get(0).getKey(), is("ITEM00001"));
-        assertThat(list.get(0).getValue(),is(0.75));
+        assertThat(list.get(0).getValue().getDiscount(),is(0.75));
 
     }
 

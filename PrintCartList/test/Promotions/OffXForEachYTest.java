@@ -15,8 +15,11 @@ public class OffXForEachYTest {
 
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(5);
+        offXForEachY.setY(100);
 
-        offXForEachY.offXForEachY(item,5,5,100);
+        offXForEachY.promotion(item);
 
         assertThat(item.getPrice(),is(190.0/5));
 
@@ -29,33 +32,42 @@ public class OffXForEachYTest {
     public void should_throw_MyException_when_item_quantity_is_smaller_than_1() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(0);
+        offXForEachY.setX(5);
+        offXForEachY.setY(100);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("item quantity can't be smaller than 1");
 
-        offXForEachY.offXForEachY(item,0,5,100);
+        offXForEachY.promotion(item);
     }
 
     @Test
     public void should_throw_MyException_when_X_is_0() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(0);
+        offXForEachY.setY(100);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("X can't be negative or 0.0");
 
-        offXForEachY.offXForEachY(item,5,0,100);
+        offXForEachY.promotion(item);
     }
 
     @Test
     public void should_throw_MyException_when_X_is_negative() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(-5);
+        offXForEachY.setY(100);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("X can't be negative or 0.0");
 
-        offXForEachY.offXForEachY(item,5,-5,100);
+        offXForEachY.promotion(item);
 
 
 
@@ -66,43 +78,55 @@ public class OffXForEachYTest {
     public void should_throw_MyException_when_Y_is_0() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(5);
+        offXForEachY.setY(0);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("Y can't be negative or 0.0");
 
-        offXForEachY.offXForEachY(item,5,5,0);
+        offXForEachY.promotion(item);
     }
 
     @Test
     public void should_throw_MyException_when_y_is_negative() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(5);
+        offXForEachY.setY(-100);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("Y can't be negative or 0.0");
 
-        offXForEachY.offXForEachY(item,5,5,-100);
+        offXForEachY.promotion(item);
     }
 
     @Test
     public void should_throw_MyException_when_y_is_smaller_than_x() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(100);
+        offXForEachY.setY(5);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("Y should be larger than X");
 
-        offXForEachY.offXForEachY(item,5,100,5);
+        offXForEachY.promotion(item);
     }
     @Test
     public void should_throw_MyException_when_y_is_equal_to_x() throws Exception {
         Item item =new Item("ITEM000001",40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
+        offXForEachY.setNum(5);
+        offXForEachY.setX(100);
+        offXForEachY.setY(100);
 
         expectedException.expect(MyException.class);
         expectedException.expectMessage("Y should be larger than X");
 
-        offXForEachY.offXForEachY(item,5,100,100);
+        offXForEachY.promotion(item);
     }
 
 

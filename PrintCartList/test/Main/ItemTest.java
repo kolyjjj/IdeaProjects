@@ -39,22 +39,16 @@ public class ItemTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    @Test(expected = MyException.class)
+    @Test
     public void should_throws_MyException_when_price_is_smaller_than_0() throws MyException {
+        expectedException.expect(MyException.class);
+        expectedException.expectMessage("price should be larger than 0!");
+
         Item item = new Item("ITEM000001",-40.0);
 
-        expectedException.expect(MyException.class);
-        expectedException.expectMessage("price should be larger than 0!");
 
     }
 
-    @Test(expected = MyException.class)
-    public void should_throws_MyException_when_price_is_0() throws MyException {
-        Item item = new Item("ITEM000001",0);
 
-        expectedException.expect(MyException.class);
-        expectedException.expectMessage("price should be larger than 0!");
-
-    }
 
 }
