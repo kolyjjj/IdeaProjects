@@ -18,8 +18,9 @@ public class CartListParseTest {
         CartListParse cartListParse = new CartListParse();
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
+        cartListParse.bufferedReader = reader;
 
-        List<Pair<String,Integer>> list = cartListParse.parser(reader);
+        List<Pair<String,Integer>> list = cartListParse.parser();
 
         assertThat(list.get(0).getKey(),is("ITEM000001"));
         assertThat(list.get(0).getValue(), is(1));
@@ -32,8 +33,9 @@ public class CartListParseTest {
         CartListParse cartListParse = new CartListParse();
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001-4").thenReturn(null);
+        cartListParse.bufferedReader = reader;
 
-        List<Pair<String,Integer>> list = cartListParse.parser(reader);
+        List<Pair<String,Integer>> list = cartListParse.parser();
 
         assertThat(list.get(0).getKey(),is("ITEM000001"));
         assertThat(list.get(0).getValue(),is(4));

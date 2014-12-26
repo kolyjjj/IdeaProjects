@@ -2,6 +2,8 @@ package Parse;
 
 //import javafx.util.Pair;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
@@ -11,8 +13,8 @@ import java.io.FileNotFoundException;
  */
 public class CartListParse extends Parser<Pair<String,Integer>> {
 
-
-    public CartListParse(String _path) throws FileNotFoundException {
+@Inject
+    public CartListParse(@Named("Cart txt Name")String _path) throws FileNotFoundException {
         super(_path);
     }
 

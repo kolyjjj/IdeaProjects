@@ -18,8 +18,9 @@ public class OffXForEachYParseTest {
         OffXForEachYParse offXForEachY = new OffXForEachYParse();
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
+        offXForEachY.bufferedReader = reader;
 
-        List<Pair<String, OffXForEachY>> list = offXForEachY.parser(reader);
+        List<Pair<String, OffXForEachY>> list = offXForEachY.parser();
 
         assertThat(list.get(0).getKey(),is("ITEM000001"));
         assertThat(list.get(0).getValue(),is(OffXForEachY.class));

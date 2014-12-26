@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * Created by arolla on 14-12-1.
  */
-public abstract class Parser<T> {
+public abstract class Parser<T>
+{
     public List<T> list = new LinkedList<T>();
 
     public BufferedReader bufferedReader;
@@ -18,13 +19,15 @@ public abstract class Parser<T> {
 
     }
 
-    public List<T> parser(BufferedReader bufferedReader) throws IOException{
+    public List<T> parser() throws IOException{
 
         String line ;
         while((line=bufferedReader.readLine()) != null&& !line.isEmpty()){
             list.add(convert(line) );
         }
         return  list;
+
+
      }
 
 

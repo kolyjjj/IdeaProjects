@@ -4,6 +4,7 @@ import Promotions.OffXForEachY;
 import Promotions.Promotion;
 import Promotions.SecondHalfPrice;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  */
 public class PutPromotionStrategiesToItemsOfCart {
 
+    public PromotionDocument promotionDocument = new PromotionDocument();
 
     private Map<Item,LinkedList<Promotion>> itemsWithPromotions = new HashMap<Item, LinkedList<Promotion>>();
 
@@ -20,12 +22,12 @@ public class PutPromotionStrategiesToItemsOfCart {
         return itemsWithPromotions;
     }
 
-    public void handleCartWithPromotions(Cart cart,PromotionDocument promotionDocument){
+    public void handleCartWithPromotions(Cart cart) throws IOException {
 
+        promotionDocument.parsePromotionDocument();
         promotionDocument.listToMap();
 
         for (Item o : cart.cartMap.keySet()) {
-            //Map.Entry<Item, Integer> entry = (Map.Entry) o;
 
             if (promotionDocument.discountPromotionMap.containsKey(o.getId())) {
                 if (!itemsWithPromotions.containsKey(o)) {
@@ -59,7 +61,7 @@ public class PutPromotionStrategiesToItemsOfCart {
 
 
         }
-    //    System.out.println(itemsWithPromotions.size());
+
 
 
     }

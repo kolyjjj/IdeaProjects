@@ -18,8 +18,9 @@ public class ItemPriceListParseTest {
             ItemPriceListParse itemPriceListParse = new ItemPriceListParse();
             BufferedReader reader = mock(BufferedReader.class);
             when(reader.readLine()).thenReturn("ITEM00001:40").thenReturn(null);
+            itemPriceListParse.bufferedReader = reader;
 
-            List<Pair<String,Double>> list = itemPriceListParse.parser(reader);
+            List<Pair<String,Double>> list = itemPriceListParse.parser();
 
             assertThat(list.get(0).getKey(), is("ITEM00001"));
             assertThat(list.get(0).getValue(),is(40.0));

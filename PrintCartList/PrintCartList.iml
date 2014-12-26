@@ -9,7 +9,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit-4.7" level="project" />
-    <orderEntry type="library" name="separate-jars" level="project" />
     <orderEntry type="library" name="mockito-all-1.9.0" level="project" />
+    <orderEntry type="library" name="separate-jars" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/guice-2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

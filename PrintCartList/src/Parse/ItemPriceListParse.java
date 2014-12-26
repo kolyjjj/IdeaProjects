@@ -1,5 +1,7 @@
 package Parse;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
@@ -9,8 +11,8 @@ import java.io.FileNotFoundException;
  */
 public class ItemPriceListParse extends Parser<Pair<String,Double>>{
 
-
-    public ItemPriceListParse(String _path) throws FileNotFoundException {
+@Inject
+    public ItemPriceListParse(@Named("ItemPriceList txt Name")String _path) throws FileNotFoundException {
         super(_path);
     }
 

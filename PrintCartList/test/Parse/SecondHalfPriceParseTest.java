@@ -18,8 +18,9 @@ public class SecondHalfPriceParseTest {
         SecondHalfPriceParse secondHalfPriceParse = new SecondHalfPriceParse();
         BufferedReader reader = mock(BufferedReader.class);
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
+        secondHalfPriceParse.bufferedReader = reader;
 
-        List<Pair<String, SecondHalfPrice>> list = secondHalfPriceParse.parser(reader);
+        List<Pair<String, SecondHalfPrice>> list = secondHalfPriceParse.parser();
 
         assertThat(list.get(0).getKey(),is("ITEM000001"));
         assertThat(list.get(0).getValue(),is(SecondHalfPrice.class));

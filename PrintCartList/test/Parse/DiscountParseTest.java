@@ -19,8 +19,9 @@ public class DiscountParseTest {
         DiscountParse discountParse = new DiscountParse();
         BufferedReader reader = mock(BufferedReader.class);
          when(reader.readLine()).thenReturn("ITEM00001:0.75").thenReturn(null);
+         discountParse.bufferedReader = reader;
 
-        List<Pair<String, Discount>> list = discountParse.parser(reader);
+        List<Pair<String, Discount>> list = discountParse.parser();
 
         assertThat(list.get(0).getKey(), is("ITEM00001"));
         assertThat(list.get(0).getValue().getDiscount(),is(0.75));

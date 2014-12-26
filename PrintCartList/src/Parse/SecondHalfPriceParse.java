@@ -1,6 +1,8 @@
 package Parse;
 
 import Promotions.SecondHalfPrice;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import javafx.util.Pair;
 
 import java.io.FileNotFoundException;
@@ -10,7 +12,8 @@ import java.io.FileNotFoundException;
  */
 public class SecondHalfPriceParse extends Parser<Pair<String, SecondHalfPrice>> {
 
-    public SecondHalfPriceParse(String _path) throws FileNotFoundException {
+@Inject
+    public SecondHalfPriceParse(@Named("SecondHalfPrice txt Name")String _path) throws FileNotFoundException {
         super(_path);
     }
 

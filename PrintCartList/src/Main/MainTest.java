@@ -1,9 +1,12 @@
 package Main;
 
+import GuiceModule.MyModule;
 import MyException.MyException;
 import Parse.CartListParse;
 import Parse.ItemPriceListParse;
 import Parse.Parser;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -14,23 +17,18 @@ import java.io.IOException;
 public class MainTest {
 
     public static void main(String[] args) throws IOException, MyException {
-        PromotionDocument promotionDocument = new PromotionDocument();
-        promotionDocument.parsePromotionDocument("discount_promotion", "second_half_price_promotion", "off_X_for_each_Y");
-        promotionDocument.listToMap();
+        Injector injector = Guice.createInjector(new MyModule());
+        Parser<Pair<String,Integer>> cartBeforeTidy = injector.getInstance(CartListParse.class);// new CartListParse("cart");
+        Parser<Pair<String,Double>> itemPrice = injector.getInstance(ItemPriceListParse.class);//new ItemPriceListParse("itemPriceList");
 
-
-        Parser<Pair<String,Integer>> cartBeforeTidy = new CartListParse("cart");
-        cartBeforeTidy.parser(cartBeforeTidy.bufferedReader);
-
-        Parser<Pair<String,Double>> itemPrice = new ItemPriceListParse("itemPriceList");
-        itemPrice.parser(itemPrice.bufferedReader);
-
+        cartBeforeTidy.parser();
+        itemPrice.parser();
 
         Cart cartAfterTidy = new Cart();
         cartAfterTidy.tidyCart(cartBeforeTidy.list,itemPrice.list);
 
         PutPromotionStrategiesToItemsOfCart strategy = new PutPromotionStrategiesToItemsOfCart();
-        strategy.handleCartWithPromotions(cartAfterTidy,promotionDocument);
+        strategy.handleCartWithPromotions(cartAfterTidy);
 
         Calculate cal = new Calculate();
         cal.calculate(strategy.getItemsWithPromotions());
@@ -40,6 +38,7 @@ public class MainTest {
         pr.setItemListBeforeHandling(cal.itemListBeforeHandling);
         pr.setItemListAfterHandling(cal.itemListAfterHandling);
         pr.print();
+
 
 
 

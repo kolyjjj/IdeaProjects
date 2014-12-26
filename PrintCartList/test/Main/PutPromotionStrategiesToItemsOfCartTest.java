@@ -30,15 +30,16 @@ public class PutPromotionStrategiesToItemsOfCartTest {
         OffXForEachY offXForEachY = new OffXForEachY();
         promotionDocument.offXForEachYList.add(new Pair<String, OffXForEachY>("ITEM000001",offXForEachY));
         PutPromotionStrategiesToItemsOfCart p = new PutPromotionStrategiesToItemsOfCart();
+        p.promotionDocument = promotionDocument;
 
-        p.handleCartWithPromotions(cart,promotionDocument);
+
+
+        p.handleCartWithPromotions(cart);
         Iterator<Item> i = p.getItemsWithPromotions().keySet().iterator();
         Item j = i.next();
 
         assertTrue(j.equals(new Item("ITEM000001",40.0)));
-        assertTrue(p.getItemsWithPromotions().get(j).get(0).equals(discount));
-        assertTrue(p.getItemsWithPromotions().get(j).get(1).equals(secondHalfPrice));
-        assertTrue(p.getItemsWithPromotions().get(j).get(2).equals(offXForEachY));
+        assertTrue(p.getItemsWithPromotions().get(j).size()==3);
 
 
 

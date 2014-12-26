@@ -1,12 +1,14 @@
 package Main;
 
+import GuiceModule.MyModule;
 import Parse.DiscountParse;
 import Parse.OffXForEachYParse;
-import Parse.Parser;
 import Parse.SecondHalfPriceParse;
 import Promotions.Discount;
 import Promotions.OffXForEachY;
 import Promotions.SecondHalfPrice;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -19,14 +21,16 @@ import java.util.Map;
  * Created by arolla on 14-12-11.
  */
 public class PromotionDocument {
+    Injector injector = Guice.createInjector(new MyModule());
+    DiscountParse parse1 = injector.getInstance(DiscountParse.class);
+    SecondHalfPriceParse parse2 = injector.getInstance(SecondHalfPriceParse.class);
+    OffXForEachYParse parse3 = injector.getInstance(OffXForEachYParse.class);
 
 
     List<Pair<String,Discount>> discountPromotionList = new LinkedList<Pair<String, Discount>>();
-    //Map<String,Double> discountPromotionMap = new HashMap<String, Double>();
     List<Pair<String, SecondHalfPrice>> secondHalfPricePromotionList = new LinkedList<Pair<String, SecondHalfPrice>>();
     List<Pair<String,OffXForEachY>> offXForEachYList = new LinkedList<Pair<String, OffXForEachY>>();
-   // List<Pair<String,Double>> itemPriceList;
-   // Map<String,Double> itemPriceMap = new HashMap<String, Double>();
+
 
     Map<String,Discount> discountPromotionMap = new HashMap<String, Discount>();
     Map<String,SecondHalfPrice> secondHalfPricePromotionMap = new HashMap<String, SecondHalfPrice>();
@@ -34,19 +38,6 @@ public class PromotionDocument {
 
 
 
-    PromotionDocument()
-    {
-//        discountPromotionList = new LinkedList<Pair<String, Discount>>();
-//        secondHalfPricePromotionList = new LinkedList<Pair<String, SecondHalfPrice>>();
-//        offXForEachYList = new LinkedList<Pair<String, OffXForEachY>>();
-
-//        itemPriceList = new LinkedList<Pair<String, Double>>();
-//
-//        discountPromotionMap = new HashMap<String, Double>();
-//        itemPriceMap = new HashMap<String, Double>();
-
-
-    }
 
     public void setDiscountPromotionList (List<Pair<String,Discount>> discountPromotionList) {
         this.discountPromotionList = discountPromotionList;
@@ -60,23 +51,16 @@ public class PromotionDocument {
         this.offXForEachYList = offXForEachYList;
     }
 
-//    public void setItemPriceMap(Map<String, Double> itemPriceMap) {
-//        this.itemPriceMap = itemPriceMap;
-//    }
 
 
-    public void parsePromotionDocument(String _discountPromotionPath, String _secondHalfPricePromotionPath, String _offXForEachYPath/*, String _itemPriceListPath*/) throws IOException {
-        Parser<Pair<String, Discount>> discountParse = new DiscountParse(_discountPromotionPath);
-        discountPromotionList = discountParse.parser(discountParse.bufferedReader);//("discount_promotion", ":");
 
-        Parser<Pair<String, SecondHalfPrice>> secondHalfPriceParse = new SecondHalfPriceParse(_secondHalfPricePromotionPath);
-        secondHalfPricePromotionList= secondHalfPriceParse.parser(secondHalfPriceParse.bufferedReader);//("second_half_price_promotion");
+    public void parsePromotionDocument() throws IOException {
 
-        Parser<Pair<String, OffXForEachY> >  offXForEachYParse = new OffXForEachYParse(_offXForEachYPath);
-        offXForEachYList= offXForEachYParse.parser(offXForEachYParse.bufferedReader);//("off_X_for_each_Y");
+        discountPromotionList = parse1.parser();
 
-//        Parser itemPriceListParse =  new ItemPriceListParse(_itemPriceListPath);
-//        itemPriceList =itemPriceListParse.parser(itemPriceListParse.bufferedReader);/* ("itemPriceList", ":"); */
+        secondHalfPricePromotionList= parse2.parser();
+
+        offXForEachYList= parse3.parser();
 
     }
 
@@ -99,8 +83,8 @@ public class PromotionDocument {
                 offXForEachYListMap.put(lines.getKey(), lines.getValue());
             }
         }
-      //  System.out.println(secondHalfPricePromotionList.size());//ceshi
+
 
     }
-   // public boolean hasPromotion(String itemId,String )
+
 }
