@@ -9,10 +9,10 @@ import java.io.FileNotFoundException;
 /**
  * Created by.
  */
-public class ItemPriceListParse extends Parser<Pair<String,Double>>{
+public class ItemPriceListParse extends Parser<Pair<String, Double>> {
 
-@Inject
-    public ItemPriceListParse(@Named("ItemPriceList txt Name")String _path) throws FileNotFoundException {
+    @Inject
+    public ItemPriceListParse(@Named("ItemPriceList txt Name") String _path) throws FileNotFoundException {
         super(_path);
     }
 
@@ -21,9 +21,8 @@ public class ItemPriceListParse extends Parser<Pair<String,Double>>{
     }
 
     @Override
-    public Pair<String,Double> convert(String line){
+    public Pair<String, Double> convert(String line) {
         String tokens[] = line.split(":");
-        return new Pair<String,Double>(tokens[0],Double.parseDouble(tokens[1]));
-
+        return new Pair<String, Double>(tokens[0], Double.parseDouble(tokens[1]));
     }
 }

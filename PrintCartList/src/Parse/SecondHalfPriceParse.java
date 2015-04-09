@@ -12,8 +12,8 @@ import java.io.FileNotFoundException;
  */
 public class SecondHalfPriceParse extends Parser<Pair<String, SecondHalfPrice>> {
 
-@Inject
-    public SecondHalfPriceParse(@Named("SecondHalfPrice txt Name")String _path) throws FileNotFoundException {
+    @Inject
+    public SecondHalfPriceParse(@Named("SecondHalfPrice txt Name") String _path) throws FileNotFoundException {
         super(_path);
     }
 
@@ -23,6 +23,6 @@ public class SecondHalfPriceParse extends Parser<Pair<String, SecondHalfPrice>> 
 
     @Override
     public Pair<String, SecondHalfPrice> convert(String line) {
-        return new Pair<String, SecondHalfPrice>(line,new SecondHalfPrice());
+        return new Pair<String, SecondHalfPrice>(line, new SecondHalfPrice());
     }
 }

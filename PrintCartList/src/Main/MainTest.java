@@ -18,14 +18,14 @@ public class MainTest {
 
     public static void main(String[] args) throws IOException, MyException {
         Injector injector = Guice.createInjector(new MyModule());
-        Parser<Pair<String,Integer>> cartBeforeTidy = injector.getInstance(CartListParse.class);// new CartListParse("cart");
-        Parser<Pair<String,Double>> itemPrice = injector.getInstance(ItemPriceListParse.class);//new ItemPriceListParse("itemPriceList");
+        Parser<Pair<String, Integer>> cartBeforeTidy = injector.getInstance(CartListParse.class);// new CartListParse("cart");
+        Parser<Pair<String, Double>> itemPrice = injector.getInstance(ItemPriceListParse.class);//new ItemPriceListParse("itemPriceList");
 
         cartBeforeTidy.parser();
         itemPrice.parser();
 
         Cart cartAfterTidy = new Cart();
-        cartAfterTidy.tidyCart(cartBeforeTidy.list,itemPrice.list);
+        cartAfterTidy.tidyCart(cartBeforeTidy.list, itemPrice.list);
 
         PutPromotionStrategiesToItemsOfCart strategy = new PutPromotionStrategiesToItemsOfCart();
         strategy.handleCartWithPromotions(cartAfterTidy);
@@ -38,11 +38,5 @@ public class MainTest {
         pr.setItemListBeforeHandling(cal.itemListBeforeHandling);
         pr.setItemListAfterHandling(cal.itemListAfterHandling);
         pr.print();
-
-
-
-
-
-
     }
 }

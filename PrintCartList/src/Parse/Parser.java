@@ -7,32 +7,28 @@ import java.util.List;
 /**
  * Created by arolla on 14-12-1.
  */
-public abstract class Parser<T>
-{
+public abstract class Parser<T> {
     public List<T> list = new LinkedList<T>();
 
     public BufferedReader bufferedReader;
-    Parser(){}
+
+    Parser() {
+    }
 
     Parser(String _path) throws FileNotFoundException {
-        bufferedReader = new BufferedReader(new FileReader(new File("/home/arolla/IdeaProjects/PrintCartList",_path)));
+        bufferedReader = new BufferedReader(new FileReader(new File("/home/arolla/IdeaProjects/PrintCartList", _path)));
 
     }
 
-    public List<T> parser() throws IOException{
-
-        String line ;
-        while((line=bufferedReader.readLine()) != null&& !line.isEmpty()){
-            list.add(convert(line) );
+    public List<T> parser() throws IOException {
+        String line;
+        while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
+            list.add(convert(line));
         }
-        return  list;
+        return list;
+    }
 
-
-     }
-
-
-     public abstract T convert(String line);
-
+    public abstract T convert(String line);
 }
 
 

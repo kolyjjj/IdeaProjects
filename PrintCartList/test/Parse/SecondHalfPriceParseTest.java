@@ -22,9 +22,7 @@ public class SecondHalfPriceParseTest {
 
         List<Pair<String, SecondHalfPrice>> list = secondHalfPriceParse.parser();
 
-        assertThat(list.get(0).getKey(),is("ITEM000001"));
-        assertThat(list.get(0).getValue(),is(SecondHalfPrice.class));
-
-
+        assertThat(list.get(0).getKey(), is("ITEM000001"));
+        assertThat(list.get(0).getValue(), is(SecondHalfPrice.class));
     }
 }

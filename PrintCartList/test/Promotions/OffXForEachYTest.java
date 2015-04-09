@@ -10,10 +10,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class OffXForEachYTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
     public void test_off_X_for_each_Y() throws Exception {
 
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(5);
@@ -21,16 +24,12 @@ public class OffXForEachYTest {
 
         offXForEachY.promotion(item);
 
-        assertThat(item.getPrice(),is(190.0/5));
-
+        assertThat(item.getPrice(), is(190.0 / 5));
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_throw_MyException_when_item_quantity_is_smaller_than_1() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(0);
         offXForEachY.setX(5);
@@ -44,7 +43,7 @@ public class OffXForEachYTest {
 
     @Test
     public void should_throw_MyException_when_X_is_0() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(0);
@@ -58,7 +57,7 @@ public class OffXForEachYTest {
 
     @Test
     public void should_throw_MyException_when_X_is_negative() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(-5);
@@ -68,15 +67,12 @@ public class OffXForEachYTest {
         expectedException.expectMessage("X can't be negative or 0.0");
 
         offXForEachY.promotion(item);
-
-
-
     }
 
     @Test
 
     public void should_throw_MyException_when_Y_is_0() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(5);
@@ -90,7 +86,7 @@ public class OffXForEachYTest {
 
     @Test
     public void should_throw_MyException_when_y_is_negative() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(5);
@@ -104,7 +100,7 @@ public class OffXForEachYTest {
 
     @Test
     public void should_throw_MyException_when_y_is_smaller_than_x() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(100);
@@ -115,9 +111,10 @@ public class OffXForEachYTest {
 
         offXForEachY.promotion(item);
     }
+
     @Test
     public void should_throw_MyException_when_y_is_equal_to_x() throws Exception {
-        Item item =new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         OffXForEachY offXForEachY = new OffXForEachY();
         offXForEachY.setNum(5);
         offXForEachY.setX(100);
@@ -128,10 +125,4 @@ public class OffXForEachYTest {
 
         offXForEachY.promotion(item);
     }
-
-
-
-
-
-
 }

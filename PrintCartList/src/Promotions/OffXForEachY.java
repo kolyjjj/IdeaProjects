@@ -45,24 +45,20 @@ public class OffXForEachY implements Promotion {
 //    }
 
     @Override
-    public Item promotion(Item item) throws MyException{
-
+    public Item promotion(Item item) throws MyException {
         if (num < 1)
             throw new MyException("item quantity can't be smaller than 1");
-        if (x<=0.0)
+        if (x <= 0.0)
             throw new MyException("X can't be negative or 0.0");
-        if (y<=0.0)
+        if (y <= 0.0)
             throw new MyException("Y can't be negative or 0.0");
-        if (x>=y)
+        if (x >= y)
             throw new MyException("Y should be larger than X");
 
         double price = item.getPrice();
-        int n = (int)(price*num/y);
-        price = (price*num - x*n)/num;
-
+        int n = (int) (price * num / y);
+        price = (price * num - x * n) / num;
         item.setPrice(price);
-
         return item;
-
     }
 }

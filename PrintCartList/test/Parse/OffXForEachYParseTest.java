@@ -22,8 +22,7 @@ public class OffXForEachYParseTest {
 
         List<Pair<String, OffXForEachY>> list = offXForEachY.parser();
 
-        assertThat(list.get(0).getKey(),is("ITEM000001"));
-        assertThat(list.get(0).getValue(),is(OffXForEachY.class));
-
+        assertThat(list.get(0).getKey(), is("ITEM000001"));
+        assertThat(list.get(0).getValue(), is(OffXForEachY.class));
     }
 }

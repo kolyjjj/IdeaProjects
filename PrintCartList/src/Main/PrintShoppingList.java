@@ -3,18 +3,21 @@ package Main;
 import MyException.MyException;
 import Promotions.OffXForEachY;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arolla on 14-11-21.
  */
 public class PrintShoppingList {
 
-    Map<Item,Integer> cartMap = new HashMap<Item,Integer>() ;
+    Map<Item, Integer> cartMap = new HashMap<Item, Integer>();
     List<Item> itemListBeforeHandling = new LinkedList<Item>();
-    List<Item> itemListAfterHandling= new LinkedList<Item>();
+    List<Item> itemListAfterHandling = new LinkedList<Item>();
     double totalPriceBefore = 0.0;
-    double totalPriceAfter =0.0;
+    double totalPriceAfter = 0.0;
 
     public void setCartMap(Map<Item, Integer> cartMap) {
         this.cartMap = cartMap;
@@ -32,7 +35,7 @@ public class PrintShoppingList {
         System.out.println("购物明细   （数量 单价 小计）");
         int i = 0;
 
-        for (Item x: cartMap.keySet()){
+        for (Item x : cartMap.keySet()) {
             String itemName = x.getId();
             int itemQuantity = cartMap.get(x);
             double itemPriceBefore = itemListBeforeHandling.get(i).getPrice();
@@ -46,8 +49,8 @@ public class PrintShoppingList {
             System.out.print("  ");
             System.out.println(itemQuantity * itemPriceAfter);
 
-            totalPriceBefore += itemPriceBefore*itemQuantity;
-            totalPriceAfter += itemPriceAfter*itemQuantity;
+            totalPriceBefore += itemPriceBefore * itemQuantity;
+            totalPriceAfter += itemPriceAfter * itemQuantity;
             i++;
         }
 
@@ -65,13 +68,7 @@ public class PrintShoppingList {
         System.out.print("  ");
         System.out.print(abstractTotalItem.getPrice());
         System.out.print("  ");
-        System.out.println(totalPriceBefore-abstractTotalItem.getPrice());
-
-
-
+        System.out.println(totalPriceBefore - abstractTotalItem.getPrice());
     }
-
-
-
-    }
+}
 

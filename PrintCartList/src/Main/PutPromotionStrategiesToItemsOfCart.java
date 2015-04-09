@@ -16,7 +16,7 @@ public class PutPromotionStrategiesToItemsOfCart {
 
     public PromotionDocument promotionDocument = new PromotionDocument();
 
-    private Map<Item,LinkedList<Promotion>> itemsWithPromotions = new HashMap<Item, LinkedList<Promotion>>();
+    private Map<Item, LinkedList<Promotion>> itemsWithPromotions = new HashMap<Item, LinkedList<Promotion>>();
 
     public Map<Item, LinkedList<Promotion>> getItemsWithPromotions() {
         return itemsWithPromotions;
@@ -36,7 +36,6 @@ public class PutPromotionStrategiesToItemsOfCart {
                 itemsWithPromotions.get(o).add(promotionDocument.discountPromotionMap.get(o.getId()));
 
             }
-
 
             if (promotionDocument.secondHalfPricePromotionMap.containsKey(o.getId())) {
 
@@ -58,12 +57,6 @@ public class PutPromotionStrategiesToItemsOfCart {
                 of.setY(100);
                 itemsWithPromotions.get(o).add(of);
             }
-
-
         }
-
-
-
     }
-
 }

@@ -11,9 +11,8 @@ import java.util.Map;
  */
 public class Cart {
 
-
-
     Map<Item, Integer> cartMap = new HashMap<Item, Integer>();
+
     public void setCartMap(Map<Item, Integer> cartMap) {
         this.cartMap = cartMap;
     }
@@ -35,8 +34,5 @@ public class Cart {
 
             cartMap.put(new Item(pair.getKey(), pair.getValue()), itemNum);
         }
-
-
     }
-
 }

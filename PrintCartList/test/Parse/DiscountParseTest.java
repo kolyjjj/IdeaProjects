@@ -13,19 +13,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class DiscountParseTest {
-     @Test
-      public void test_discount_parse_() throws Exception {
+    @Test
+    public void test_discount_parse_() throws Exception {
 
         DiscountParse discountParse = new DiscountParse();
         BufferedReader reader = mock(BufferedReader.class);
-         when(reader.readLine()).thenReturn("ITEM00001:0.75").thenReturn(null);
-         discountParse.bufferedReader = reader;
+        when(reader.readLine()).thenReturn("ITEM00001:0.75").thenReturn(null);
+        discountParse.bufferedReader = reader;
 
         List<Pair<String, Discount>> list = discountParse.parser();
 
         assertThat(list.get(0).getKey(), is("ITEM00001"));
-        assertThat(list.get(0).getValue().getDiscount(),is(0.75));
-
+        assertThat(list.get(0).getValue().getDiscount(), is(0.75));
     }
 
 }

@@ -18,7 +18,7 @@ public class CalculateTest {
     @Test
     public void testCalculate() throws Exception {
         //Map<Item,LinkedList<Promotion>> itemsWithPromotions
-        Item item = new Item("ITEM00001",40.0);
+        Item item = new Item("ITEM00001", 40.0);
         Discount discount = new Discount();
         discount.setDiscount(0.75);
         SecondHalfPrice secondHalfPrice = new SecondHalfPrice();
@@ -28,21 +28,19 @@ public class CalculateTest {
         offXForEachY.setX(5);
         offXForEachY.setY(100);
         LinkedList<Promotion> list = new LinkedList<Promotion>();
-        list.add(discount);list.add(secondHalfPrice);list.add(offXForEachY);
+        list.add(discount);
+        list.add(secondHalfPrice);
+        list.add(offXForEachY);
 
-        Map<Item,LinkedList<Promotion>> itemsWithPromotions = new HashMap<Item, LinkedList<Promotion>>();
+        Map<Item, LinkedList<Promotion>> itemsWithPromotions = new HashMap<Item, LinkedList<Promotion>>();
         itemsWithPromotions.put(item, list);
         Calculate cal = new Calculate();
         cal.calculate(itemsWithPromotions);
 
-        assertThat(cal.itemListBeforeHandling.get(0).getId(),is(item.getId()));
-        assertThat(cal.itemListBeforeHandling.get(0).getPrice(),is(item.getPrice()));
+        assertThat(cal.itemListBeforeHandling.get(0).getId(), is(item.getId()));
+        assertThat(cal.itemListBeforeHandling.get(0).getPrice(), is(item.getPrice()));
 
-        assertThat(cal.itemListAfterHandling.get(0).getId(),is(item.getId()));
-        assertThat(cal.itemListAfterHandling.get(0).getPrice(),is(23.0));
-
-
-
-
+        assertThat(cal.itemListAfterHandling.get(0).getId(), is(item.getId()));
+        assertThat(cal.itemListAfterHandling.get(0).getPrice(), is(23.0));
     }
 }

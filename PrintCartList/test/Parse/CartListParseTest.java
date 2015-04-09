@@ -20,11 +20,10 @@ public class CartListParseTest {
         when(reader.readLine()).thenReturn("ITEM000001").thenReturn(null);
         cartListParse.bufferedReader = reader;
 
-        List<Pair<String,Integer>> list = cartListParse.parser();
+        List<Pair<String, Integer>> list = cartListParse.parser();
 
-        assertThat(list.get(0).getKey(),is("ITEM000001"));
+        assertThat(list.get(0).getKey(), is("ITEM000001"));
         assertThat(list.get(0).getValue(), is(1));
-
     }
 
     @Test
@@ -35,10 +34,10 @@ public class CartListParseTest {
         when(reader.readLine()).thenReturn("ITEM000001-4").thenReturn(null);
         cartListParse.bufferedReader = reader;
 
-        List<Pair<String,Integer>> list = cartListParse.parser();
+        List<Pair<String, Integer>> list = cartListParse.parser();
 
-        assertThat(list.get(0).getKey(),is("ITEM000001"));
-        assertThat(list.get(0).getValue(),is(4));
+        assertThat(list.get(0).getKey(), is("ITEM000001"));
+        assertThat(list.get(0).getValue(), is(4));
 
     }
 }

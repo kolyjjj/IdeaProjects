@@ -10,19 +10,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class SecondHalfPriceTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
     public void test_second_half_price() throws Exception {
-        Item item = new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         SecondHalfPrice secondHalfPrice = new SecondHalfPrice();
         secondHalfPrice.setNum(5);
 
         secondHalfPrice.promotion(item);
 
-        assertThat(item.getPrice(),is((40.0+20.0+40.0+20.0+40)/5));
+        assertThat(item.getPrice(), is((40.0 + 20.0 + 40.0 + 20.0 + 40) / 5));
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_throw_MyException_when_item_quantity_is_0() throws Exception {
@@ -38,7 +38,7 @@ public class SecondHalfPriceTest {
 
     @Test
     public void should_throw_MyException_when_item_quantity_is_negative() throws Exception {
-        Item item = new Item("ITEM000001",40.0);
+        Item item = new Item("ITEM000001", 40.0);
         SecondHalfPrice secondHalfPrice = new SecondHalfPrice();
         secondHalfPrice.setNum(-1);
 
@@ -46,8 +46,5 @@ public class SecondHalfPriceTest {
         expectedException.expectMessage("item quantity should be larger than 0");
 
         secondHalfPrice.promotion(item);
-
-
-
     }
 }
